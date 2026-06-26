@@ -2,7 +2,7 @@
 
 Score any dataset for data quality the way a governance team actually does — across the **eight standard data-quality dimensions** — then drill into the exact records that fail each rule.
 
-> **Live demo:** _add your Streamlit Cloud link here after deploy_
+> **Live demo:** **https://data-governance-dashboard-gcsduhxqjh4dly9c8tzwqg.streamlit.app/**
 > **Built with:** Python · pandas · Streamlit · pytest — **no external APIs, no keys; your data never leaves the app.**
 
 ---
