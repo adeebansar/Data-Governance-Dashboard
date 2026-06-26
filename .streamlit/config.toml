@@ -1,0 +1,16 @@
+# Premium dark theme — native Streamlit widgets inherit these tokens,
+# the custom CSS in app.py layers the luxury chrome on top.
+[theme]
+base = "dark"
+primaryColor = "#E5B567"            # luxury gold accent
+backgroundColor = "#0A0B10"         # obsidian
+secondaryBackgroundColor = "#14161E" # elevated surface (sidebar, widgets)
+textColor = "#F3F4F6"
+font = "sans serif"
+
+[browser]
+gatherUsageStats = false
+
+[server]
+# Cap uploads so a very large CSV can't exhaust memory on a public deployment.
+maxUploadSize = 10

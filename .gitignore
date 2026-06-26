@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Secrets / local config (this app needs none, but never commit them anyway)
+.env
+*.env
+.streamlit/secrets.toml
+
+# OS / logs
+.DS_Store
+*.log

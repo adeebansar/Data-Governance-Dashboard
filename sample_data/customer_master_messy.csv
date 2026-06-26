@@ -1,0 +1,46 @@
+customer_id,full_name,email,phone,country,age,signup_date,last_active_date,annual_revenue,referred_by,status
+C0001,Firstname1 Lastname1,user1@example.com,+1-555-001-1001,Canada,26,2024-03-15,2026-05-20,51000,,Inactive
+C0002,Firstname2 Lastname2,user2@example.com,+1-555-002-1002,United Kingdom,27,2024-03-15,2026-05-20,52000,C0001,Churned
+C0003,Firstname3 Lastname3,user3@example.com,+1-555-003-1003,India,28,2024-03-15,2026-05-20,53000,C0001,Active
+C0004,Firstname4 Lastname4,user4@example.com,+1-555-004-1004,Germany,29,2024-03-15,2026-05-20,54000,C0001,Inactive
+C0005,Firstname5 Lastname5,user5@example.com,+1-555-005-1005,United States,30,2024-03-15,2026-05-20,55000,C0001,Churned
+C0006,Firstname6 Lastname6,user6@example.com,+1-555-006-1006,Canada,31,2024-03-15,2026-05-20,56000,C0001,Active
+C0007,Firstname7 Lastname7,user7@example.com,+1-555-007-1007,United Kingdom,32,2024-03-15,2026-05-20,57000,C0001,Inactive
+C0008,Firstname8 Lastname8,user8@example.com,+1-555-008-1008,India,33,2024-03-15,2026-05-20,58000,C0001,Churned
+C0009,Firstname9 Lastname9,user9@example.com,+1-555-009-1009,Germany,34,2024-03-15,2026-05-20,59000,C0001,Active
+C0010,Firstname10 Lastname10,user10@example.com,+1-555-010-1010,United States,35,2024-03-15,2026-05-20,60000,C0001,Inactive
+C0011,Firstname11 Lastname11,user11@example.com,+1-555-011-1011,Canada,36,2024-03-15,2026-05-20,61000,C0001,Churned
+C0012,Firstname12 Lastname12,user12@example.com,+1-555-012-1012,United Kingdom,37,2024-03-15,2026-05-20,62000,C0001,Active
+C0013,Firstname13 Lastname13,user13@example.com,+1-555-013-1013,India,38,2024-03-15,2026-05-20,63000,C0001,Inactive
+C0014,Firstname14 Lastname14,user14@example.com,+1-555-014-1014,Germany,39,2024-03-15,2026-05-20,64000,C0001,Churned
+C0015,Firstname15 Lastname15,user15@example.com,+1-555-015-1015,United States,40,2024-03-15,2026-05-20,65000,C0001,Active
+C0016,Firstname16 Lastname16,user16@example.com,+1-555-016-1016,Canada,41,2024-03-15,2026-05-20,66000,C0001,Inactive
+C0017,Firstname17 Lastname17,user17@example.com,+1-555-017-1017,United Kingdom,42,2024-03-15,2026-05-20,67000,C0001,Churned
+C0018,Firstname18 Lastname18,user18@example.com,+1-555-018-1018,India,43,2024-03-15,2026-05-20,68000,C0001,Active
+C0019,Firstname19 Lastname19,user19@example.com,+1-555-019-1019,Germany,44,2024-03-15,2026-05-20,69000,C0001,Inactive
+C0020,Firstname20 Lastname20,user20@example.com,+1-555-020-1020,United States,45,2024-03-15,2026-05-20,70000,C0001,Churned
+C0021,Firstname21 Lastname21,user21@example.com,+1-555-021-1021,Canada,46,2024-03-15,2026-05-20,71000,C0001,Active
+C0022,Firstname22 Lastname22,user22@example.com,+1-555-022-1022,United Kingdom,47,2024-03-15,2026-05-20,72000,C0001,Inactive
+C0023,Firstname23 Lastname23,user23@example.com,+1-555-023-1023,India,48,2024-03-15,2026-05-20,73000,C0001,Churned
+C0024,Firstname24 Lastname24,user24@example.com,+1-555-024-1024,Germany,49,2024-03-15,2026-05-20,74000,C0001,Active
+C0025,Firstname25 Lastname25,user25@example.com,+1-555-025-1025,United States,50,2024-03-15,2026-05-20,75000,C0001,Inactive
+C0026,Firstname26 Lastname26,user26@example.com,+1-555-026-1026,Canada,51,2024-03-15,2026-05-20,76000,C0001,Churned
+C0027,Firstname27 Lastname27,user27@example.com,+1-555-027-1027,United Kingdom,52,2024-03-15,2026-05-20,77000,C0001,Active
+C0028,Firstname28 Lastname28,user28@example.com,+1-555-028-1028,India,53,2024-03-15,2026-05-20,78000,C0001,Inactive
+C0029,Grace Hopper,,+1-555-200-2001,United States,40,2024-01-10,2026-04-01,72000,C0001,Active
+C0030,,ada@example.com,+1-555-201-2002,Canada,40,2024-02-11,2026-04-02,61000,C0001,Active
+C0031,Alan Turing,alan@example.com,+1-555-202-2003,United Kingdom,40,2024-02-12,2026-04-03,,C0001,Inactive
+C0001,Linus Pauling,linus@example.com,+1-555-203-2004,Germany,40,2024-02-13,2026-04-04,88000,C0001,Active
+C0032,Marie Curie,user5@example.com,+1-555-204-2005,India,40,2024-02-14,2026-04-05,90000,C0001,Active
+C0033,Niels Bohr,niels.bohr.example.com,+1-555-205-2006,Germany,40,2024-02-15,2026-04-06,77000,C0001,Active
+C0034,Rosalind Franklin,rosalind@example.com,555 2006,United Kingdom,40,2024-02-16,2026-04-07,65000,C0001,Inactive
+C0035,Enrico Fermi,enrico@example.com,+1-555-206-2007,India,40,2024-02-17,2026-04-08,-15000,C0001,Active
+C0036,Lise Meitner,lise@example.com,+1-555-207-2008,Germany,40,not-a-date,2026-04-09,54000,C0001,Active
+C0037,Paul Dirac,paul@example.com,+1-555-208-2009,usa,40,2024-02-18,2026-04-10,59000,C0001,Active
+C0038,Max Planck,max@example.com,+1-555-209-2010,Germany,40,2024-02-19,2026-04-11,63000,C0001,actv
+C0039,Erwin Schrodinger,erwin@example.com,+1-555-210-2011,United States,40,2024-06-01,2024-01-01,70000,C0001,Active
+C0040,Werner Heisenberg,werner@example.com,+1-555-211-2012,Germany,40,2027-01-01,2027-02-01,81000,C0001,Active
+C0041,Dmitri Mendeleev,dmitri@example.com,+1-555-212-2013,India,40,2019-01-01,2019-06-01,48000,C0001,Inactive
+C0042,Katherine Johnson,katherine@example.com,+1-555-213-2014,United States,35,2024-03-01,2026-04-12,67000,C9999,Active
+C0043,Tu Youyou,tu@example.com,+1-555-214-2015,Germany,250,2024-03-02,2026-04-13,71000,C0001,Active
+C0044,John Bardeen,johnb@example.com,+1-555-215-2016,Canada,7,2024-03-03,2026-04-14,69000,C0001,Active
