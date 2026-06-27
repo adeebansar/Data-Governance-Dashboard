@@ -19,13 +19,14 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
+import ai_risk
 import data_quality as dq
 from rules_config import CUSTOMER_MASTER_SCHEMA, SAMPLE_AS_OF, infer_schema
 
 SAMPLE_PATH = Path(__file__).with_name("sample_data") / "customer_master_messy.csv"
 
 st.set_page_config(
-    page_title="Data Quality & Governance Dashboard",
+    page_title="Data & AI Governance Dashboard",
     page_icon="🛡️",
     layout="wide",
 )
@@ -166,8 +167,8 @@ def render_hero(source_label: str, report: dict) -> None:
     st.markdown(
         f"""
         <div class="hero">
-          <div class="eyebrow">Data Governance · Quality Assessment</div>
-          <h1>🛡️ Data Quality &amp; Governance Dashboard</h1>
+          <div class="eyebrow">Data Governance · AI Risk · Quality</div>
+          <h1>🛡️ Data &amp; AI Governance Dashboard</h1>
           <div class="meta">Source <b>{safe}</b> &nbsp;·&nbsp;
             <span class="mono">{report['row_count']}</span> rows ×
             <span class="mono">{report['column_count']}</span> columns &nbsp;·&nbsp;
@@ -310,6 +311,67 @@ def build_report_csv(report: dict) -> str:
     return pd.DataFrame(rows).to_csv(index=False)
 
 
+def _risk_band(level: str) -> str:
+    return {"High": "bad", "Medium": "warn", "Low": "good"}.get(level, "warn")
+
+
+def render_ai_risk(df: pd.DataFrame, sensitive_columns: list) -> None:
+    try:
+        risk = ai_risk.assess_ai_risk(df, sensitive_columns)
+    except ValueError as exc:
+        st.error(str(exc))
+        return
+    band = _risk_band(risk["risk_level"])
+    st.markdown(
+        f"""<div class="card" style="max-width:360px"><div class="lbl">AI data-risk level</div>
+        <div class="score mono {band}" style="font-size:2.4rem">{risk['risk_level']}</div>
+        <div class="sub">across personal-data, representation, and readiness checks</div></div>""",
+        unsafe_allow_html=True,
+    )
+    st.write("")
+
+    st.markdown('<div class="section">Personal-data exposure '
+                '<span class="hint">— minimise &amp; protect (EU AI Act / GDPR)</span></div>',
+                unsafe_allow_html=True)
+    if risk["pii"]:
+        st.dataframe(pd.DataFrame([
+            {"Column": p["column"], "Likely contains": ", ".join(p["categories"])}
+            for p in risk["pii"]
+        ]), hide_index=True, use_container_width=True)
+        st.caption(risk["framework"]["pii"])
+    else:
+        st.caption("No obvious personal-data columns detected.")
+
+    st.markdown('<div class="section">Representation &amp; bias risk '
+                '<span class="hint">— set sensitive attributes in the sidebar</span></div>',
+                unsafe_allow_html=True)
+    if risk["representation"]:
+        for r in risk["representation"]:
+            fb = "bad" if r["flags"] else "good"
+            note = " · ".join(r["flags"]) if r["flags"] else "balanced"
+            st.markdown(
+                f'<div class="cat-name" style="margin-top:.5rem"><span class="dot {fb}"></span>'
+                f'{r["column"]} <span class="cat-foot" style="display:inline">— {r["groups"]} groups · {note}</span></div>',
+                unsafe_allow_html=True)
+            st.dataframe(pd.DataFrame(r["distribution"]).rename(
+                columns={"value": "Group", "count": "Count", "pct": "% of rows"}),
+                hide_index=True, use_container_width=True)
+        st.caption(risk["framework"]["representation"])
+    else:
+        st.caption("Pick one or more sensitive attributes in the sidebar to assess representation.")
+
+    st.markdown('<div class="section">AI-readiness gaps '
+                '<span class="hint">— high missingness to resolve before training</span></div>',
+                unsafe_allow_html=True)
+    if risk["readiness"]:
+        st.dataframe(pd.DataFrame([
+            {"Column": x["column"], "Missing %": x["null_pct"]} for x in risk["readiness"]
+        ]), hide_index=True, use_container_width=True)
+        st.caption(risk["framework"]["readiness"])
+    else:
+        st.caption("No columns exceed the missingness threshold.")
+
+
 def main() -> None:
     df, schema, as_of, source_label = load_source()
     try:
@@ -318,25 +380,34 @@ def main() -> None:
         st.error(f"Could not assess this file: {exc}")
         st.stop()
 
-    render_hero(source_label, report)
-    render_topline(report)
-    st.write("")
-    render_categories(report)
-    st.divider()
-    render_dimension_detail(report, df)
-    st.divider()
-    render_profile(report)
+    cat_cols = [c for c in df.columns if 2 <= df[c].nunique(dropna=True) <= 50]
+    default_sens = [c for c in ["country", "gender", "sex", "status", "region", "ethnicity"]
+                    if c in df.columns][:2]
+    sensitive = st.sidebar.multiselect(
+        "Sensitive attributes (bias / representation)", cat_cols, default=default_sens)
 
-    st.download_button(
-        "⬇️ Download quality report (CSV)",
-        data=build_report_csv(report),
-        file_name="data_quality_report.csv",
-        mime="text/csv",
-    )
+    render_hero(source_label, report)
+    tab_quality, tab_ai = st.tabs(["Data quality", "AI governance — data risk"])
+    with tab_quality:
+        render_topline(report)
+        st.write("")
+        render_categories(report)
+        st.divider()
+        render_dimension_detail(report, df)
+        st.divider()
+        render_profile(report)
+        st.download_button(
+            "⬇️ Download quality report (CSV)",
+            data=build_report_csv(report),
+            file_name="data_quality_report.csv",
+            mime="text/csv",
+        )
+    with tab_ai:
+        render_ai_risk(df, sensitive)
     st.markdown(
         """
         <div class="footer-sign">
-          <div class="meta-cap">Eight-dimension data-quality framework · no external APIs · your data never leaves the app.</div>
+          <div class="meta-cap">Data quality + AI data-risk, mapped to NIST AI RMF &amp; the EU AI Act · no external APIs · your data never leaves the app.</div>
           <div class="sign-wrap">
             <div class="sign-label">Built by</div>
             <div class="signature">Adeeb Syed</div>

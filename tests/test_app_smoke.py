@@ -14,4 +14,4 @@ def test_app_boots_on_sample_dataset():
     at = AppTest.from_file(str(APP)).run(timeout=60)
     assert not at.exception, f"App raised: {at.exception}"
     # The default sidebar choice is the sample dataset, so a score must render.
-    assert any("Data Quality" in str(m.value) for m in at.markdown)
+    assert any("Governance Dashboard" in str(m.value) for m in at.markdown)

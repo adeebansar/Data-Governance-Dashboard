@@ -1,6 +1,6 @@
-# 🛡️ Data Quality & Governance Dashboard
+# 🛡️ Data & AI Governance Dashboard
 
-Score any dataset for data quality the way a governance team actually does — across the **eight standard data-quality dimensions** — then drill into the exact records that fail each rule.
+Score any dataset across the **eight standard data-quality dimensions**, then run an **AI-governance data-risk assessment** — personal-data (PII) exposure, representation / bias risk, and AI-readiness — mapped to the **NIST AI Risk Management Framework** and the **EU AI Act**.
 
 > **Live demo:** **https://data-governance-dashboard-gcsduhxqjh4dly9c8tzwqg.streamlit.app/**
 > **Built with:** Python · pandas · Streamlit · pytest — **no external APIs, no keys; your data never leaves the app.**
@@ -30,12 +30,17 @@ Bad master data quietly breaks reporting, billing, compliance, and analytics. Go
 - **Drills into failures** — pick any failing rule and see the exact offending rows.
 - **Exports a quality report** as CSV for sharing or tracking over time.
 - **Works on your own data** — upload any CSV and the tool infers a conservative rule set automatically; or use the bundled sample to see the full, hand-authored governance rule set in action.
+- **Assesses AI / model data-risk** (AI-governance tab) — flags personal-data (PII) exposure, tests chosen sensitive attributes for representation / bias, and surfaces AI-readiness gaps, each mapped to the NIST AI RMF and EU AI Act.
 
 ## Screenshots
 
-![Data Quality & Governance Dashboard — overview](screenshots/01-overview.png)
+![Data & AI Governance Dashboard — data-quality overview](screenshots/01-overview.png)
 
-The overall score, discrepancy categories (missing / duplicate / invalid / implausible / non-conforming / inconsistent / orphaned / stale), per-rule results, and row-level drill-down — in a dark, data-dense layout.
+Data-quality tab: the overall score, discrepancy categories (missing / duplicate / invalid / implausible / non-conforming / inconsistent / orphaned / stale), per-rule results, and row-level drill-down.
+
+![AI governance — data-risk assessment](screenshots/02-ai-governance.png)
+
+AI-governance tab: personal-data exposure, representation / bias risk, and AI-readiness, each mapped to the NIST AI RMF and EU AI Act.
 
 ## Quickstart
 
